@@ -80,8 +80,7 @@
         "footprint_symbol_mismatch": "warning",
         "footprint_type_mismatch": "ignore",
         "hole_clearance": "error",
-        "hole_near_hole": "error",
-        "hole_to_hole": "error",
+        "hole_to_hole": "warning",
         "holes_co_located": "warning",
         "invalid_outline": "error",
         "isolated_copper": "warning",
@@ -132,7 +131,7 @@
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.2,
         "min_microvia_drill": 0.1,
-        "min_resolved_spokes": 2,
+        "min_resolved_spokes": 1,
         "min_silk_clearance": 0.0,
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
@@ -189,9 +188,7 @@
       ],
       "track_widths": [
         0.0,
-        0.25,
-        0.3,
-        0.6
+        0.3
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -468,7 +465,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "bicolour-matrix.kicad_pro",
+    "filename": "button-board-r2.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -628,24 +625,8 @@
   },
   "sheets": [
     [
-      "e84f39ba-210d-4605-8a72-491c35119d1d",
+      "c1054cca-9414-4084-a196-71cb409e4063",
       "Root"
-    ],
-    [
-      "f9d7f8b2-c3a5-4324-ae77-f696507ca2f9",
-      "Matrix 1"
-    ],
-    [
-      "431ef086-9322-4409-88dc-a7e78b0c8a20",
-      "Matrix 2"
-    ],
-    [
-      "72339506-edd6-41af-827b-fad84880e8ae",
-      "Matrix 3"
-    ],
-    [
-      "89241a80-2b9c-4d48-90e9-d02f477dcf9e",
-      "Matrix 4"
     ]
   ],
   "text_variables": {}

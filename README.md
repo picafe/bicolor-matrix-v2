@@ -1,47 +1,129 @@
-# bicolor-matrix
+# Bicolour Matrix
 
-![](./assets/20251230_154919.jpg)
+A 32x8 bicolor LED matrix module composed of 4 8x8 matrices based on the Holtek HT16K33A I2C LED driver. V1 paired it with a stacked adapter (RP2040 Zero + DS3231 module); V2 redesigns the matrix routing and puts an ESP32-C3, RTC, and environment sensors on a half-length adapter board behind the display.
 
-A 32x8 bicolor LED matrix module composed of 4 8x8 matrices based on the Holtek HT16K33A I2C LED driver.
+![V1 assembled clock showing the time](./assets/20251230_154919.jpg)
+
+*V1 running as a clock*
 
 ## Inspiration
 
-Inspired by the common 32x8 red LED matrix modules that use the MAX7219 IC, I wanted to make my own module but with more colours and functionality, while keeping the same asthetic. 
+Inspired by the common 32x8 red LED matrix modules that use the MAX7219 IC, I wanted to make my own module but with more colours and functionality, while keeping the same asthetic.
 
 I found [these](https://www.aliexpress.com/item/1005007029570407.html) modules while browsing Aliexpress and thought they could look be a cool alternative. With the red and light green variant, you can have red, a light green, and orange all in one module. As far as I'm aware, there aren't RGB modules in a similar form factor, although you can take generic WS2818 8x8 matricies and 3D print a diffuser for them, although the footprint is much bigger. This project was also partially inspired by [bitluni's LED magnet tiles](https://www.youtube.com/watch?v=L2J_eNgjxio) which I found really cool.
 
 Unlike the single colour matricies with 16 pins, these had 24. I found [this](https://www.adafruit.com/product/902) Adafruit module and followed a similar schematic with the Holtek HT16K33A I2C LED driver, but with an inverted board layout, and with 4 modules on one PCB. This was my 2nd PCB project, so it was definately a big undertaking.
 
-## Showcase
+For V2 I revisited the HT16K33A datasheet and realized any ROW/COL pin can map to any matrix row/column, thus routing got a lot simpler than matching Adafruit's pinout exactly.
 
-Matrix Board:
-![](./assets/kicad_lJh8NCgMIq.png)
+## Structure
 
-Adapter Board:
-This adds functionality through a RP2040 Zero board, a DS3231 module and a small buzzer, and a generic logic level shifter since the Holtek IC only operates near 5V.
+| Board | Role |
+| --- | --- |
+| **bicolour-matrix** | 32×8 display: 4× HT16K33A + 4× 8×8 bicolour matrices |
+| **adapter-board-r2** | ESP32-C3-WROOM-02, CH340X USB-UART, YSN8900 RTC + CR2032, SCD41, ENS210, BMP580, LIS2DW12 |
+| **button-board-r2** *(optional / WIP)* | OLED + light sensor + touch pads - still being redesigned for mounting |
 
-Button Board:
-An addition to the adapter board and provides 4 interface buttons for setting time
+The adapter is half the length of the matrix board and mates with a pin header between the middle modules so that the stack stays stable without a case.
 
-![](./assets/20251230_154934.jpg)
-![](./assets/20251230_155052.jpg)
-![](./assets/20251230_155732.jpg)
+## Pictures
+
+### Assembled (V1)
+
+![V1 boards laid out - adapter, button board, matrix](./assets/20251230_155052.jpg)
+
+![V1 side / stack view](./assets/20251230_154934.jpg)
+
+### V2 
+
+#### 3D
+
+![Adapter board R2 3D view](assets/kicad_D8XJL0poVo.png)
+
+*Adapter board R2 (3D)*
+
+![Matrix board R2 3D view](assets/kicad_lRKuYlyQjE.png)
+
+*Matrix board R2 (3D)*
+
+#### Schematics
+
+![Matrix board schematic](assets/matrix-board-v2-sch-1.png)
+![Matrix board module schematic](assets/matrix-board-v2-sch-2.png)
+
+*Matrix board schematic*
+
+![Adapter board schematic](assets/adapter-board-v2-sch.png)
+
+*Adapter board R2 schematic*
+
+#### PCB
+
+![Matrix board R2 PCB layout](assets/kicad_7Zfg95iswx.png)
+
+*Matrix board PCB (four HT16K33A modules)*
+
+![Adapter board R2 PCB layout](assets/kicad_ezY7QcU7CC.png)
+
+*Adapter board R2 PCB*
 
 
-## Bill of Materials (BOM) + Assembly Notes
-Item | Quantity | Description
-| -------- | ------- | ------- |
-[Machine Pin Headers](https://www.aliexpress.com/item/10000000838267.html) | 5 Pcs | 2.54mm pitch circular pin headers to connect the LED matricies to the main PCB. These are needed such as to not solder the matrix boards directly to the PCB, allowing for easier replacement if needed.
-12mm x 12mm Buttons | 4 | Generic 12mm tactile push buttons, whatever is cheapest on Aliexpress. I used [these](https://www.aliexpress.com/item/10000000838267.html).
-RP2040 Zero | 1 | Microcontroller board, whatever is cheapest on Aliexpress. I bought from [here](https://www.aliexpress.com/item/1005007650325892.html).
-[DS3231 Module](https://www.aliexpress.com/item/1005007143842437.html) | 1 | Mini module without the battery, basically a simple breakout. Use side cutters to cut the plastic on the pre-soldered female headers, then desolder each of the pins. Solder in male headers.
-Level Shifter | 1 | 4-channel logic level shifter module, whatever is cheapest on Aliexpress. They are cheapest in packs of 10, so you can use the extra ones for other projects. I bought from [here](https://www.aliexpress.com/item/1005006765742290.html).
-Buzzer | 1 | Generic 3.3V 7.6mm diameter buzzer, whatever is cheapest on Aliexpress.
-[Right Angle Pin Headers](https://www.aliexpress.com/item/32896209964.html) | 1 | Get the R1 type of pin headers pictured here, they're slightly more uncommon and more expensive than the R1 type. This is for the button board connection. ![](./assets/pinheaders.jpg)
-2.54mm Pin Headers (Male and Female) | 1 | To connect the matrix board to the adapter board and general use. This [video](https://www.youtube.com/watch?v=qDG3VFSMSPQ) shows how to make custom length female headers.
+## Bill of materials
 
-Buying Note: I recommend you try to buy components on the Aliexpress mobile app (web on desktop doesn't seem to have a search bar) in Bundle Deals if you can find them as you can get better prices, and they usually ship faster.
+Prices are estimated from LCSC single-board quantities and AliExpress for the LED matrices.
 
-Ordering Note: I recommend you to create your own adapter board for the project. The one I built has some design flaws (button board doesn't fit flush with the adapter board, the right angle headers need to be positioned lower, and usb connector placement could be improved).
+### Matrix board (`bicolour-matrix`)
 
-It was designed to be a prototype and optimize costs, so I recommend you to make your own design based on your needs. I was browsing Aliexpress a few days ago and found this [RP2350 stamp module](https://www.aliexpress.com/item/1005008513193739.html) which would make a better alternative since you can position the USB connector anywhere on the PCB. It's also relatively cheap.
+| Designator | Value | Footprint | Qty | LCSC | Unit cost (est.) | Line total (est.) |
+| --- | --- | --- | --- | --- | --- | --- |
+| C1, C6 | 10 µF | 0805 | 2 | C440198 | $0.02 | $0.04 |
+| C2, C3, C4, C5 | 100 nF | 0603 | 4 | C14663 | $0.01 | $0.04 |
+| D1, D2, D3, D4 | 1N4148WS | SOD-323 | 4 | C2128 | $0.01 | $0.04 |
+| J1, J2 | 1×04 pin header | Through hole | 2 | — | $0.05 | $0.10 |
+| J3, J4 | JST SH 1×04 (Qwiic-style) | SMD | 2 | — | $0.15 | $0.30 |
+| J5 | 1×02 socket | Through hole | 1 | — | $0.05 | $0.05 |
+| LED1, LED2, LED3, LED4 | 8×8 bicolour matrix | Module | 4 | AliExpress | $2.00 | $8.00 |
+| R3, R4, R5, R9, R10, R11, R13, R14, R15, R18, R19, R20 | 47 kΩ | 0603 | 12 | C25819 | $0.002 | $0.02 |
+| U1, U2, U3, U4 | HT16K33A | SSOP-28 | 4 | C5444738 | $0.54 | $2.16 |
+| | | | | **Total (matrix, components only)** | | **~$10.75** |
+
+### Adapter board (`adapter-board-r2`)
+
+| Designator | Value | Footprint | Qty | LCSC | Unit cost (est.) | Line total (est.) |
+| --- | --- | --- | --- | --- | --- | --- |
+| BT1 | CR2032 holder | SMD | 1 | C7498149 | $0.15 | $0.15 |
+| C1 | 1 µF | 0603 | 1 | C15849 | $0.01 | $0.01 |
+| C3, C7, C10, C17 | 100 nF | 0603 | 4 | C14663 | $0.01 | $0.04 |
+| C4, C8, C9, C11, C12, C13, C15, C16 | 100 nF | 0402 | 8 | C1525 | $0.005 | $0.04 |
+| C14 | 10 µF | 0603 | 1 | C19702 | $0.02 | $0.02 |
+| C2 | 10 µF | 0805 | 1 | C15850 | $0.03 | $0.03 |
+| C5, C6 | 4.7 µF | 1206 | 2 | C29823 | $0.03 | $0.06 |
+| D1 | B5817WS | SOD-323 | 1 | C7420329 | $0.05 | $0.05 |
+| F1, F2 | 1.1 A fuse | 0805 | 2 | — | $0.05 | $0.10 |
+| J1 | USB-C receptacle 14P | Through hole | 1 | C3151746 | $0.30 | $0.30 |
+| J2 | 1×02 socket | Through hole | 1 | — | $0.05 | $0.05 |
+| J3 | 1×04 socket | Through hole | 1 | — | $0.08 | $0.08 |
+| J4 | JST SH 1×07 | SMD | 1 | — | $0.25 | $0.25 |
+| Q1 | UMH3N | SOT-363 | 1 | — | $0.08 | $0.08 |
+| Q2, Q3 | BSS138W | SOT-323 | 2 | C28646265 | $0.03 | $0.06 |
+| R1, R2 | 10 kΩ | 0603 | 2 | C25804 | $0.002 | $0.004 |
+| R3, R4 | 5.1 kΩ | 0603 | 2 | C23186 | $0.002 | $0.004 |
+| R5, R6, R7, R8 | 4.7 kΩ | 0603 | 4 | C23162 | $0.002 | $0.008 |
+| S1, S2 | Tactile button, 160 gf | PTS810 | 2 | C720477 | $0.10 | $0.20 |
+| U1 | ESP32-C3-WROOM-02 | Module | 1 | C2934560 | $3.13 | $3.13 |
+| U2 | USBLC6-2SC6 | SOT-23-6 | 1 | C7519 | $0.18 | $0.18 |
+| U3 | CH340X | MSOP-10 | 1 | C3035748 | $0.67 | $0.67 |
+| U4 | AP2114HA-3.3TRG1 | SOT-223 | 1 | C460314 | $0.25 | $0.25 |
+| U5 | ENS210 | QFN-4 | 1 | C2991202 | $1.63 | $1.63 |
+| U6 | LIS2DW12TR | LGA-12 | 1 | C189624 | $1.26 | $1.26 |
+| U7 | SCD40-D-R2 | Module / LGA | 1 | C3659421 | $18.29 | $18.29 |
+| U8 | YSN8900AP3 (RX8900 clone) | SMD3225-10P | 1 | C54780223 | $1.46 | $1.46 |
+| U9 | BMP580 | LGA-10 | 1 | C22391138 | $0.96 | $0.96 |
+| | | | | **Total (adapter, components only)** | | **~$29.37** |
+
+**Combined components (matrix + adapter): ~$40.12**  
+*(PCBs: ~$30 matrix + ~$12 adapter at JLCPCB)*
+
+## Known issues
+
+- Caseless vs sensors - design is meant to look good without an enclosure, but SCD40 / ENS210 / BMP580 don't work well with dust; a later cased revision with an isolated sensor cavity is planned.
