@@ -97,4 +97,6 @@ Although it took quite a bit to route and get everything ironed out, finally man
 
 Somewhere along the way, I also decided to add an accelerometer (LIS2DW12) to make this cable of some particle motion simulation or something like an hourglass feature, which would be pretty cool especially with 3 crisp colours on the matrix displays. After exporting the BOM and PCB to LCSC and JLC, everything came out to roughly $12 for the adapter board PCB, $35 for parts, and $30 for the matrix board PCB.
 
+![alt text](assets/kicad_D8XJL0poVo.png)
+
 **Total time spent: 4 hours**
