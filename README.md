@@ -12,7 +12,7 @@ Inspired by the common 32x8 red LED matrix modules that use the MAX7219 IC, I wa
 
 I found [these](https://www.aliexpress.com/item/1005007029570407.html) modules while browsing Aliexpress and thought they could look be a cool alternative. With the red and light green variant, you can have red, a light green, and orange all in one module. As far as I'm aware, there aren't RGB modules in a similar form factor, although you can take generic WS2818 8x8 matricies and 3D print a diffuser for them, although the footprint is much bigger. This project was also partially inspired by [bitluni's LED magnet tiles](https://www.youtube.com/watch?v=L2J_eNgjxio) which I found really cool.
 
-Unlike the single colour matricies with 16 pins, these had 24. I found [this](https://www.adafruit.com/product/902) Adafruit module and followed a similar schematic with the Holtek HT16K33A I2C LED driver, but with an inverted board layout, and with 4 modules on one PCB. This was my 2nd PCB project, so it was definately a big undertaking.
+Unlike the single colour matricies with 16 pins, these had 24. I found [this](https://www.adafruit.com/product/902) Adafruit module and followed a similar schematic with the Holtek HT16K33A I2C LED driver.
 
 For V2 I revisited the HT16K33A datasheet and realized any ROW/COL pin can map to any matrix row/column, thus routing got a lot simpler than matching Adafruit's pinout exactly.
 
@@ -22,9 +22,11 @@ For V2 I revisited the HT16K33A datasheet and realized any ROW/COL pin can map t
 | --- | --- |
 | **bicolour-matrix** | 32×8 display: 4× HT16K33A + 4× 8×8 bicolour matrices |
 | **adapter-board-r2** | ESP32-C3-WROOM-02, CH340X USB-UART, YSN8900 RTC + CR2032, SCD41, ENS210, BMP580, LIS2DW12 |
-| **button-board-r2** *(optional / WIP)* | OLED + light sensor + touch pads - still being redesigned for mounting |
+| **button-board-r2** *(optional / WIP)* | OLED + light sensor + touch pads |
 
 The adapter is half the length of the matrix board and mates with a pin header between the middle modules so that the stack stays stable without a case.
+
+The button board is a separate interface that is connected to the adapter board with a 7-pin JST SH connector. This is meant to be customized and built by the user themselves, although I've included a sample design with an OLED, light sensor, and 2x touch pads you can start from. What you include and how you integrate it is up to you and how you want to design an enclosure.
 
 ## Pictures
 
