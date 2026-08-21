@@ -1,9 +1,0 @@
-﻿Designator,Footprint,Quantity,Value,LCSC Part #
-BT1,BatteryHolder_Keystone_3034_1x20mm,1,Battery_Cell,
-BZ1,Buzzer_12x9.5RM7.6,1,Buzzer,
-J1,PinHeader_1x02_P2.54mm_Vertical,1,Conn_01x02_Socket,
-J2,PinHeader_1x05_P2.54mm_Horizontal,1,Conn_01x05_Pin,
-"J4, J5",PinSocket_1x04_P2.54mm_Vertical,2,Conn_01x04_Socket,
-RZ1,RP2040-Zero,1,RP2040-Zero,
-U1,Generic-Level-Shifter,1,~,
-U2,PinHeader_1x05_P2.54mm_Vertical,1,~,
