@@ -100,3 +100,11 @@ Somewhere along the way, I also decided to add an accelerometer (LIS2DW12) to ma
 ![alt text](assets/kicad_D8XJL0poVo.png)
 
 **Total time spent: 4 hours**
+
+# August 18, 2026: Changed components - STCC4, SHT4x
+
+After doing some cost comparisons, I decided to go with the STCC4 for CO₂ instead of the SCD41 while also keeping pads for the SCD41 in case. I also decided to go with the SHT4x for humidity and temperature instead of the ENS210, since it's supported by default with the STCC4 for compensation. I just added 0402 0 ohm jumpers to connect the SHT4x to the STCC4 compensation bus instead of the main I²C bus. I also had to re-route a lot of other components like the accelerometer and RTC to fit traces.
+
+![alt text](assets/kicad_87tpiUztGo.png)
+
+**Total time spent: 1.5 hours**
