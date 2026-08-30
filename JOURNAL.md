@@ -1,3 +1,5 @@
+Total time spent: 21 hours
+
 # June 15, 2025: Coming back for R2 - freer pinout & QWIIC
 
 Note: I built R1 over the span of a few months, modifying a few things as I went. I didn't record many details, but the finished results are pictured in the README.md.
@@ -108,3 +110,12 @@ After doing some cost comparisons, I decided to go with the STCC4 for CO₂ inst
 ![alt text](assets/kicad_87tpiUztGo.png)
 
 **Total time spent: 1.5 hours**
+
+# August 26, 2026:
+
+I made a few changes to the routing of the main adapter board, since I had some traces in weird places from before; since I had to move matricies to adjust alignment so a few traces were not perfectly straight. Since I have to get this via a green PCB, the misalignment would be noticeable. I also added some orph and heidi pcb art from hc stickers!! I also added silkscreen labels for everything.
+
+**Total time spent: 1 hour**
+
+![alt text](<assets/final1.png>)
+![alt text](<assets/final2.png>)
