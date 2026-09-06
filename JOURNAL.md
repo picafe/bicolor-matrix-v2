@@ -111,7 +111,7 @@ After doing some cost comparisons, I decided to go with the STCC4 for CO₂ inst
 
 **Total time spent: 1.5 hours**
 
-# August 26, 2026:
+# August 26, 2026: Routing and silkscreen changes
 
 I made a few changes to the routing of the main adapter board, since I had some traces in weird places from before; since I had to move matricies to adjust alignment so a few traces were not perfectly straight. Since I have to get this via a green PCB, the misalignment would be noticeable. I also added some orph and heidi pcb art from hc stickers!! I also added silkscreen labels for everything.
 
@@ -119,3 +119,11 @@ I made a few changes to the routing of the main adapter board, since I had some 
 
 ![alt text](<assets/final1.png>)
 ![alt text](<assets/final2.png>)
+
+# September 6, 2026: Simple enclosure
+
+I made a really simple enclosure in Onshape. Since I'm very constrained for time, it's quite minimal, but is very similar to the original 3D printed case I used for my matrix clock before any of the PCBs (before v1, see journal_r1.md). It should still be functional and add polish to the project as I added cutouts for the USB and sensors. Battery will basically never need to be replaced, so there's no cutout for that.
+
+![alt text](assets/firefox_qOKQogIuke.png)
+
+**Total time spent: 0.6 hours**
